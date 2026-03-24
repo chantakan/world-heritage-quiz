@@ -1412,7 +1412,7 @@ let state={mode:'start',quizMode:'sr',quizSize:10,region:'全地域',questions:[
 let map=null,tileLayer=null,guessMarker=null,answerMarker=null,line=null;
 
 function ensureMap(){
-  if(map&&!document.getElementById('map')){try{map.remove()}catch(e){}map=null;tileLayer=null}
+  if(map&&!document.body.contains(map.getContainer())){try{map.remove()}catch(e){}map=null;tileLayer=null;guessMarker=null;answerMarker=null;line=null}
   if(map)return;const el=document.getElementById('map');if(!el)return;
   map=L.map(el,{center:[20,0],zoom:2,minZoom:2,maxZoom:12,zoomControl:false,attributionControl:false,worldCopyJump:true,fadeAnimation:false,markerZoomAnimation:false});
   tileLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19,subdomains:'abcd',attribution:'© OSM © CARTO'}).addTo(map);
