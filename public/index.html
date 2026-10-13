@@ -50,6 +50,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font-
 .map-wrap{flex:1;margin:0 10px 0;border-radius:var(--radius);overflow:hidden;border:1px solid rgba(232,220,200,.1);position:relative;min-height:0}
 #map{width:100%;height:100%;background:#2d261f;will-change:transform}
 .leaflet-container{background:#2d261f !important}
+.leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(1.1) sepia(.15)}
 .result-overlay{position:absolute;bottom:0;left:0;right:0;background:rgba(26,22,18,.95);backdrop-filter:blur(10px);padding:16px;border-top:1px solid rgba(232,220,200,.1);z-index:1000;max-height:55%;overflow-y:auto;animation:slideUp .25s ease-out}
 @keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
 .result-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
@@ -1415,7 +1416,7 @@ function ensureMap(){
   if(map&&!document.body.contains(map.getContainer())){try{map.remove()}catch(e){}map=null;tileLayer=null;guessMarker=null;answerMarker=null;line=null}
   if(map)return;const el=document.getElementById('map');if(!el)return;
   map=L.map(el,{center:[20,0],zoom:2,minZoom:2,maxZoom:12,zoomControl:false,attributionControl:false,worldCopyJump:true,fadeAnimation:false,markerZoomAnimation:false});
-  tileLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19,subdomains:'abcd',attribution:'© OSM © CARTO'}).addTo(map);
+  tileLayer=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
   L.control.zoom({position:'bottomright'}).addTo(map);
 }
 function clearOverlays(){
